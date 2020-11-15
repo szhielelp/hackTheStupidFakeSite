@@ -68,7 +68,7 @@ const loop = (n) => {
   let x = 1;
   const startTel = 13700001000;
   while (x <= n) {
-    const tel = startTel + n;
+    const tel = startTel + x;
     order(tel);
     console.log(tel);
     x += 1;
