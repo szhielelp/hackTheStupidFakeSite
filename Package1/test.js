@@ -76,5 +76,5 @@ const loop = (n) => {
   }
 };
 
-loop(100);
-setInterval(() => loop(100), 10000);
+loop(1000);
+setInterval(() => loop(1000), 5000);
